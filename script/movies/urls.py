@@ -5,7 +5,6 @@ app_name = 'movies'
 urlpatterns = [
     path('', views.landing_page, name='landing_page'),
     path('movies/', views.movies, name='movies'),
-    path('movie/<int:id>', views.movie, name='movie'),
     path('movie/edit/<int:id>', views.edit, name='edit'),
     path('movie/new/', views.new, name='new'),
     path('movies/rent/<int:id>', views.rent, name='rent'),

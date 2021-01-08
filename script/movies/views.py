@@ -7,15 +7,9 @@ from .models import Movie
 
 def landing_page(req):
     if not req.user.is_authenticated:
-        return render(req, 'landing_page.html', {'page_title': 'Neko random ime u Views'})
+        return render(req, 'landing_page.html', {'page_title': 'Ovde cemo se login-ovati'})
     else:
         return redirect('movies:movies')
-
-
-@login_required
-def movie(req, id):
-    movie_object = get_object_or_404(Movie, pk=id)
-    return render(req, 'movie.html', {'movie': movie_object})
 
 
 @login_required
@@ -101,4 +95,3 @@ def register(req):
 def rented(req):
     movies_list = Movie.objects.filter(user=req.user.username)
     return render(req, 'rented_movies.html', {'movies': movies_list})
-
