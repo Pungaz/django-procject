@@ -38,6 +38,21 @@ Edit movie
         {% endif %}
     </div>
 
+    <div class="form-group">
+        <label for="{{ form.release_date.id_for_label }}">{{ form.release_date.label_tag }}</label>
+        <textarea class="form-control" id="{{ form.release_date.id_for_label }}" name="{{ form.release_date.name }}"
+                  rows="5">{{ form.release_date.value }}</textarea>
+        {% if form.description.errors %}
+        <div class="alert alert-danger">
+            <ul style="text-align: left">
+                {% for error in form.description.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="{{ form.rented.id_for_label }}"
                name="{{ form.rented.name }}" {% if form.rented.value %} checked="checked" {% endif %}>

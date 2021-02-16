@@ -13,4 +13,4 @@ class UserCreationForm(UserCreationForm):
 class MovieForm(ModelForm):
     class Meta:
         model = Movie
-        fields = ('title', 'rented', 'description')
+        fields = ('title', 'rented', 'description', 'release_date')
