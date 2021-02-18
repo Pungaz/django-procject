@@ -22,17 +22,11 @@ All Movies We Offer
         <div class="card-body">
             <p class="card-text">
                 {{ movie.description }}
+                <br>
+                <span class="label release_date">Release date: {{ movie.release_date }}</span>
+                <br>
+                <span class="label release_date">Rating: {{ movie.rating }}</span>
             </p>
-            {% if not movie.rented %}
-                <form method="post" action="{% url 'movies:rent' movie.id %}">
-                    {% csrf_token %}
-                    <input type="submit" class="btn btn-primary btn-lg" value="Rent this movie"/>
-                </form>
-            {% else %}
-                <h2>
-                    <div class="badge badge-secondary">This movie is currently rented</div>
-                </h2>
-            {% endif %}
         </div>
     </div>
     {% endfor %}

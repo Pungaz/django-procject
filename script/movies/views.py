@@ -1,21 +1,18 @@
+import time
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
+
 from .forms import MovieForm
 from .models import Movie
 
 
 def landing_page(req):
     if not req.user.is_authenticated:
-        return render(req, 'landing_page.html', {'page_title': 'Neko random ime u Views'})
+        return render(req, 'landing_page.html', {'page_title': 'Ovde cemo se login-ovati'})
     else:
         return redirect('movies:movies')
-
-
-@login_required
-def movie(req, id):
-    movie_object = get_object_or_404(Movie, pk=id)
-    return render(req, 'movie.html', {'movie': movie_object})
 
 
 @login_required
@@ -48,8 +45,12 @@ def edit(req, id):
 def new(req):
     if req.method == 'POST':
         form = MovieForm(req.POST)
+        vreme = int(time.time() * 1000)
         if form.is_valid():
-            movie_object = Movie(title=form.cleaned_data['title'], description=form.cleaned_data['description'])
+            movie_object = Movie(title=form.cleaned_data['title'], description=form.cleaned_data['description'],
+                                 rented=False, rented_count=0, created_at=vreme,
+                                 updated_at=vreme, release_date=form.cleaned_data['release_date'],
+                                 rating=form.cleaned_data['rating'])
             movie_object.save()
             return redirect('movies:movies')
         else:
@@ -57,16 +58,6 @@ def new(req):
     else:
         form = MovieForm()
         return render(req, 'new.html', {'form': form})
-
-
-@login_required
-def rent(req, id):
-    if req.method == 'POST':
-        movie_object = Movie.objects.get(pk=id)
-        movie_object.user = req.user.username
-        movie_object.rented = True
-        movie_object.save()
-    return redirect('movies:movies')
 
 
 @login_required
@@ -99,6 +90,5 @@ def register(req):
 
 @login_required
 def rented(req):
-    movies_list = Movie.objects.filter(user=req.user.username)
+    movies_list = Movie.objects.filter(user=req.user.id)
     return render(req, 'rented_movies.html', {'movies': movies_list})
-

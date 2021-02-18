@@ -1,0 +1,39 @@
+{% extends 'master.html' %}
+
+{% block title %}
+All analytic data
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analiticki grafovi</title>
+</head>
+<body>
+
+<li>
+
+    <figure>
+        <embed type="image/svg+xml" src="../static/charts/chart1.svg" style="width:600px;height:600px;"/>
+    </figure>
+
+    <figure>
+        <embed type="image/svg+xml" src="../static/charts/chart2.svg" style="width:600px;height:600px;"/>
+    </figure>
+
+    <figure>
+        <embed type="image/svg+xml" src="../static/charts/chart3.svg" style="width:600px;height:600px;"/>
+    </figure>
+
+    <figure>
+        <embed type="image/svg+xml" src="../static/charts/chart4.svg" style="width:600px;height:600px;"/>
+    </figure>
+
+
+</li>
+
+</body>
+</html>
+{% endblock %}
