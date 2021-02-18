@@ -49,7 +49,8 @@ def new(req):
         if form.is_valid():
             movie_object = Movie(title=form.cleaned_data['title'], description=form.cleaned_data['description'],
                                  rented=False, rented_count=0, created_at=vreme,
-                                 updated_at=vreme, release_date=form.cleaned_data['release_date'])
+                                 updated_at=vreme, release_date=form.cleaned_data['release_date'],
+                                 rating=form.cleaned_data['rating'])
             movie_object.save()
             return redirect('movies:movies')
         else:
